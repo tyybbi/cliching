@@ -8,3 +8,8 @@ Get dependencies first by running *go get -d*. Afterwards, you can run
 **cliching** with *go build cliching.go && ./cliching* or just without
 building by *go run cliching.go*.
 
+## Notes
+
+Credit to kennwhite for the
+[word_wrap](https://gist.github.com/kennwhite/306317d81ab4a885a965e25aa835b8ef) function.
+
