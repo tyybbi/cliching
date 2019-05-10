@@ -486,6 +486,7 @@ func main() {
 		}
 	}
 
+	fmt.Println("  Primary Figure")
 	fmt.Printf("    %s%v\n", ws, phex.Id)
 	for _, k := range phex.Lines {
 		fmt.Printf("%s%s", ws, k)
@@ -494,6 +495,7 @@ func main() {
 	fmt.Println(word_wrap(phex.Desc, 35))
 	fmt.Println()
 	if relating {
+		fmt.Println(" Relating Figure")
 		fmt.Printf("    %s%v\n", ws, rhex.Id)
 		for _, k := range rhex.Lines {
 			fmt.Printf("%s%s", ws, k)
