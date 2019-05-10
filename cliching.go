@@ -5,9 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"math/rand"
+	"strings"
 	"time"
-
-	wordwrap "github.com/mitchellh/go-wordwrap"
 )
 
 type Hexagram struct {
@@ -68,6 +67,26 @@ func generateHexagram(coins bool) [6]string {
 		}
 		return freshHexagram
 	}
+}
+
+func word_wrap(text string, lineWidth int) string {
+	words := strings.Fields(strings.TrimSpace(text))
+	if len(words) == 0 {
+		return text
+	}
+
+	wrapped := words[0]
+	spaceLeft := lineWidth - len(wrapped)
+	for _, word := range words[1:] {
+		if len(word)+1 > spaceLeft {
+			wrapped += "\n" + word
+			spaceLeft = lineWidth - len(word)
+		} else {
+			wrapped += " " + word
+			spaceLeft -= 1 + len(word)
+		}
+	}
+	return wrapped
 }
 
 func main() {
@@ -472,7 +491,7 @@ func main() {
 		fmt.Printf("%s%s", ws, k)
 		fmt.Println()
 	}
-	fmt.Println(wordwrap.WrapString(phex.Desc, 35))
+	fmt.Println(word_wrap(phex.Desc, 35))
 	fmt.Println()
 	if relating {
 		fmt.Printf("    %s%v\n", ws, rhex.Id)
@@ -480,7 +499,7 @@ func main() {
 			fmt.Printf("%s%s", ws, k)
 			fmt.Println()
 		}
-		fmt.Println(wordwrap.WrapString(rhex.Desc, 35))
+		fmt.Println(word_wrap(rhex.Desc, 35))
 		fmt.Println()
 	}
 }
