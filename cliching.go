@@ -418,8 +418,9 @@ func main() {
 
 	var ws string = "    "
 	// Flags
-	var coins bool = false
+	var coins, quiet bool = false, false
 	flag.BoolVar(&coins, "c", false, "Use coins method instead of marbles")
+	flag.BoolVar(&quiet, "q", false, "Don't show descriptions")
 
 	flag.Parse()
 
@@ -487,21 +488,29 @@ func main() {
 	}
 
 	fmt.Println("  Primary Figure")
-	fmt.Printf("    %s%v\n", ws, phex.Id)
 	for _, k := range phex.Lines {
 		fmt.Printf("%s%s", ws, k)
 		fmt.Println()
 	}
-	fmt.Println(word_wrap(phex.Desc, 35))
+	fmt.Printf("    %s%v\n", ws, phex.Id)
+	fmt.Printf("%s%v\n", ws, phex.Name)
 	fmt.Println()
+	if !quiet {
+		fmt.Println(word_wrap(phex.Desc, 35))
+		fmt.Println()
+	}
 	if relating {
 		fmt.Println(" Relating Figure")
-		fmt.Printf("    %s%v\n", ws, rhex.Id)
 		for _, k := range rhex.Lines {
 			fmt.Printf("%s%s", ws, k)
 			fmt.Println()
 		}
-		fmt.Println(word_wrap(rhex.Desc, 35))
+		fmt.Printf("    %s%v\n", ws, rhex.Id)
+		fmt.Printf("%s%v\n", ws, rhex.Name)
 		fmt.Println()
+		if !quiet {
+			fmt.Println(word_wrap(rhex.Desc, 35))
+			fmt.Println()
+		}
 	}
 }
