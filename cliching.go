@@ -95,12 +95,12 @@ func main() {
 	    "hexagrams": [ {
 	        "id":   1,
 	        "lines": ["---------", "---------",  "---------",  "---------", "---------",  "---------"],
-	        "name": "Force",
+	        "name": " Force",
 	        "desc": "Strength, creative energy, action; the power of heaven to create and destroy; dynamic, untiring, tenacious, enduring."
 	        }, {
 	        "id":   2,
 	        "lines": ["---   ---", "---   ---", "---   ---", "---   ---", "---   ---", "---   ---"],
-	        "name": "Field",
+	        "name": " Field",
 	        "desc": "Yield, nourish, provide; the power to give form to all things; receptive, gentle, giving, supple;\nwelcome, consent."
 	        }, {
 	        "id":   3,
@@ -195,7 +195,7 @@ func main() {
 	        }, {
 	        "id":   21,
 	        "lines": ["---------", "---   ---",  "---   ---",  "---------", "---   ---",  "---------"],
-	        "name": "Gnawing And Biting Through",
+	        "name": "Gnawing And\n    Biting Through",
 	        "desc": "Confront the problem, bite through the obstacle, be tenacious, reveal the essential."
 	        }, {
 	        "id":   22,
@@ -225,7 +225,7 @@ func main() {
 	        }, {
 	        "id":   27,
 	        "lines": ["---------", "---   ---",  "---   ---",  "---   ---", "---   ---",  "---------"],
-	        "name": "Jaws",
+	        "name": "  Jaws",
 	        "desc": "Nourishing and being nourished, food and words; the mouth, your daily bread; take things in, swallow."
 	        }, {
 	        "id":   28,
@@ -345,12 +345,12 @@ func main() {
 	        }, {
 	        "id":   51,
 	        "lines": ["---------", "---   ---",  "---   ---",  "---------", "---   ---",  "---   ---"],
-	        "name": "Shake",
+	        "name": " Shake",
 	        "desc": "A disturbing and fertilizing shock; wake up, stir up, begin the new; return of life and love in spring."
 	        }, {
 	        "id":   52,
 	        "lines": ["---   ---",  "---   ---",  "---------", "---   ---", "---   ---",  "---------"],
-	        "name": "Bound",
+	        "name": " Bound",
 	        "desc": "Calm, still, stabilize; limit or boundary, end of a cycle; become an individual."
 	        }, {
 	        "id":   53,
@@ -380,7 +380,7 @@ func main() {
 	        }, {
 	        "id":   58,
 	        "lines": ["---------", "---------", "---   ---",  "---------", "---------", "---   ---"],
-	        "name": "Open",
+	        "name": "  Open",
 	        "desc": "Communication, self-expression; pleasure, joy, interaction; persuade, exchange, the marketplace."
 	        }, {
 	        "id":   59,
