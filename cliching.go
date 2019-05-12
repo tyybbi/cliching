@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"math/rand"
+	"os"
 	"strings"
 	"time"
 )
@@ -87,6 +89,21 @@ func word_wrap(text string, lineWidth int) string {
 		}
 	}
 	return wrapped
+}
+
+func printer(hexagram Hexagram, title string, quiet bool) {
+	fmt.Println(title)
+	for _, k := range hexagram.Lines {
+		fmt.Printf("    %s", k)
+		fmt.Println()
+	}
+	fmt.Printf("        %v\n", hexagram.Id)
+	fmt.Printf("    %v\n", hexagram.Name)
+	fmt.Println()
+	if !quiet {
+		fmt.Println(word_wrap(hexagram.Desc, 35))
+		fmt.Println()
+	}
 }
 
 func main() {
@@ -416,24 +433,38 @@ func main() {
 	    ]
 	}`)
 
-	var ws string = "    "
-	// Flags
 	var coins, quiet bool = false, false
+	var showhex int = 1
 	flag.BoolVar(&coins, "c", false, "Use coins method instead of marbles")
 	flag.BoolVar(&quiet, "q", false, "Don't show descriptions")
+	flag.IntVar(&showhex, "s", 1, "Show certain hexagram and its description")
 
 	flag.Parse()
+
+	phex := Hexagram{}
+	rhex := Hexagram{}
 
 	var h Hexagrams
 	json.Unmarshal(jsonData, &h)
 
-	rand.Seed(time.Now().UnixNano())
-
 	var relating bool = false
 	var initialHxgrm, primaryShape, relatingShape [6]string
+	const primaryTitle string = "  Primary Figure"
+	const relatingTitle string = "  Relating Figure"
 
-	phex := Hexagram{}
-	rhex := Hexagram{}
+	if showhex < 1 || showhex > 64 {
+		log.Fatalf("Accepted values: 1-64. Got %d\n", showhex)
+	} else {
+		phex.Id = h.Hexagrams[showhex-1].Id
+		phex.Name = h.Hexagrams[showhex-1].Name
+		phex.Name = h.Hexagrams[showhex-1].Name
+		phex.Lines = h.Hexagrams[showhex-1].Lines
+		phex.Desc = h.Hexagrams[showhex-1].Desc
+		printer(phex, "", quiet)
+		os.Exit(0)
+	}
+
+	rand.Seed(time.Now().UnixNano())
 
 	initialHxgrm = generateHexagram(coins)
 
@@ -487,30 +518,8 @@ func main() {
 		}
 	}
 
-	fmt.Println("  Primary Figure")
-	for _, k := range phex.Lines {
-		fmt.Printf("%s%s", ws, k)
-		fmt.Println()
-	}
-	fmt.Printf("    %s%v\n", ws, phex.Id)
-	fmt.Printf("%s%v\n", ws, phex.Name)
-	fmt.Println()
-	if !quiet {
-		fmt.Println(word_wrap(phex.Desc, 35))
-		fmt.Println()
-	}
+	printer(phex, primaryTitle, quiet)
 	if relating {
-		fmt.Println(" Relating Figure")
-		for _, k := range rhex.Lines {
-			fmt.Printf("%s%s", ws, k)
-			fmt.Println()
-		}
-		fmt.Printf("    %s%v\n", ws, rhex.Id)
-		fmt.Printf("%s%v\n", ws, rhex.Name)
-		fmt.Println()
-		if !quiet {
-			fmt.Println(word_wrap(rhex.Desc, 35))
-			fmt.Println()
-		}
+		printer(rhex, relatingTitle, quiet)
 	}
 }
