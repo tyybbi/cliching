@@ -457,7 +457,6 @@ func main() {
 	} else {
 		phex.Id = h.Hexagrams[showhex-1].Id
 		phex.Name = h.Hexagrams[showhex-1].Name
-		phex.Name = h.Hexagrams[showhex-1].Name
 		phex.Lines = h.Hexagrams[showhex-1].Lines
 		phex.Desc = h.Hexagrams[showhex-1].Desc
 		printer(phex, "", quiet)
