@@ -434,10 +434,10 @@ func main() {
 	}`)
 
 	var coins, quiet bool = false, false
-	var showhex int = 1
+	var showhex int
 	flag.BoolVar(&coins, "c", false, "Use coins method instead of marbles")
 	flag.BoolVar(&quiet, "q", false, "Don't show descriptions")
-	flag.IntVar(&showhex, "s", 1, "Show certain hexagram and its description")
+	flag.IntVar(&showhex, "s", 666, "Show certain hexagram and its description")
 
 	flag.Parse()
 
@@ -452,15 +452,17 @@ func main() {
 	const primaryTitle string = "  Primary Figure"
 	const relatingTitle string = "  Relating Figure"
 
-	if showhex < 1 || showhex > 64 {
-		log.Fatalf("Accepted values: 1-64. Got %d\n", showhex)
-	} else {
-		phex.Id = h.Hexagrams[showhex-1].Id
-		phex.Name = h.Hexagrams[showhex-1].Name
-		phex.Lines = h.Hexagrams[showhex-1].Lines
-		phex.Desc = h.Hexagrams[showhex-1].Desc
-		printer(phex, "", quiet)
-		os.Exit(0)
+	if showhex != 777 {
+		if showhex < 1 || showhex > 64 {
+			log.Fatalf("Accepted values: 1-64. Got %d\n", showhex)
+		} else {
+			phex.Id = h.Hexagrams[showhex-1].Id
+			phex.Name = h.Hexagrams[showhex-1].Name
+			phex.Lines = h.Hexagrams[showhex-1].Lines
+			phex.Desc = h.Hexagrams[showhex-1].Desc
+			printer(phex, "", quiet)
+			os.Exit(0)
+		}
 	}
 
 	rand.Seed(time.Now().UnixNano())
