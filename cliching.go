@@ -437,7 +437,7 @@ func main() {
 	var showhex int
 	flag.BoolVar(&coins, "c", false, "Use coins method instead of marbles")
 	flag.BoolVar(&quiet, "q", false, "Don't show descriptions")
-	flag.IntVar(&showhex, "s", 666, "Show certain hexagram and its description")
+	flag.IntVar(&showhex, "s", 777, "Show certain hexagram and its description")
 
 	flag.Parse()
 
