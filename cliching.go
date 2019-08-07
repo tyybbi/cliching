@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"log"
 	"math/rand"
 	"os"
 	"strings"
@@ -104,6 +103,16 @@ func printer(hexagram Hexagram, title string, quiet bool) {
 		fmt.Println(word_wrap(hexagram.Desc, 35))
 		fmt.Println()
 	}
+}
+
+func isFlagPassed(show string) bool {
+	found := false
+	flag.Visit(func(f *flag.Flag) {
+		if f.Name == show {
+			found = true
+		}
+	})
+	return found
 }
 
 func main() {
@@ -437,7 +446,7 @@ func main() {
 	var showhex int
 	flag.BoolVar(&coins, "c", false, "Use coins method instead of marbles")
 	flag.BoolVar(&quiet, "q", false, "Don't show descriptions")
-	flag.IntVar(&showhex, "s", 777, "Show certain hexagram and its description")
+	flag.IntVar(&showhex, "s", 0, "Show chosen hexagram (1-64) and its description")
 
 	flag.Parse()
 
@@ -452,9 +461,10 @@ func main() {
 	const primaryTitle string = "  Primary Figure"
 	const relatingTitle string = "  Relating Figure"
 
-	if showhex != 777 {
+	if isFlagPassed("s") {
 		if showhex < 1 || showhex > 64 {
-			log.Fatalf("Accepted values: 1-64. Got %d\n", showhex)
+			flag.Usage()
+			os.Exit(1)
 		} else {
 			phex.Id = h.Hexagrams[showhex-1].Id
 			phex.Name = h.Hexagrams[showhex-1].Name
