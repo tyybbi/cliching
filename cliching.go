@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -88,6 +89,25 @@ func word_wrap(text string, lineWidth int) string {
 		}
 	}
 	return wrapped
+}
+
+func findHxgrmManually(find string) [6]string {
+	var re = regexp.MustCompile(`[xy]{6}`)
+	var shape [6]string
+
+	if !re.MatchString(find) || len(find) != 6 {
+		flag.Usage()
+		os.Exit(1)
+	} else {
+		for i, _ := range find {
+			if string(find[i]) == "x" {
+				shape[i] = "---------"
+			} else {
+				shape[i] = "---   ---"
+			}
+		}
+	}
+	return shape
 }
 
 func printer(hexagram Hexagram, title string, quiet bool) {
@@ -444,9 +464,11 @@ func main() {
 
 	var coins, quiet bool = false, false
 	var showhex int
+	var find string
 	flag.BoolVar(&coins, "c", false, "Use coins method instead of marbles")
 	flag.BoolVar(&quiet, "q", false, "Don't show descriptions")
 	flag.IntVar(&showhex, "s", 0, "Show chosen hexagram (1-64) and its description")
+	flag.StringVar(&find, "f", "", "Find hexagram by its lines: x denotes Yang line, y denotes Yin line (from top down)")
 
 	flag.Parse()
 
@@ -477,7 +499,11 @@ func main() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	initialHxgrm = generateHexagram(coins)
+	if find != "" {
+		initialHxgrm = findHxgrmManually(find)
+	} else {
+		initialHxgrm = generateHexagram(coins)
+	}
 
 	for i := 0; i < len(initialHxgrm); i++ {
 		if initialHxgrm[i] == "--- X ---" {
