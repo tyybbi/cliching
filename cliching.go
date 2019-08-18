@@ -125,10 +125,10 @@ func printer(hexagram Hexagram, title string, quiet bool) {
 	}
 }
 
-func isFlagPassed(show string) bool {
+func isFlagPassed(flg string) bool {
 	found := false
 	flag.Visit(func(f *flag.Flag) {
-		if f.Name == show {
+		if f.Name == flg {
 			found = true
 		}
 	})
@@ -480,7 +480,7 @@ func main() {
 
 	var relating bool = false
 	var initialHxgrm, primaryShape, relatingShape [6]string
-	const primaryTitle string = "  Primary Figure"
+	var primaryTitle string = "  Primary Figure"
 	const relatingTitle string = "  Relating Figure"
 
 	if isFlagPassed("s") {
@@ -499,8 +499,9 @@ func main() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	if find != "" {
+	if isFlagPassed("f") {
 		initialHxgrm = findHxgrmManually(find)
+		primaryTitle = ""
 	} else {
 		initialHxgrm = generateHexagram(coins)
 	}
