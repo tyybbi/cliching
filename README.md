@@ -11,5 +11,5 @@ building by *go run cliching.go*.
 ## Notes
 
 Credit to kennwhite for the
-[word_wrap](https://gist.github.com/kennwhite/306317d81ab4a885a965e25aa835b8ef) function.
+[wordWrap](https://gist.github.com/kennwhite/306317d81ab4a885a965e25aa835b8ef) function.
 

@@ -12,7 +12,7 @@ import (
 )
 
 type Hexagram struct {
-	Id    int       `json:"id"`
+	ID    int       `json:"id"`
 	Lines [6]string `json:"lines"`
 	Name  string    `json:"name"`
 	Desc  string    `json:"desc"`
@@ -55,23 +55,23 @@ func generateHexagram(coins bool) [6]string {
 			}
 		}
 		return freshHexagram
-	} else {
-		marbles := [16]string{
-			"--- X ---",
-			"----O----", "----O----", "----O----",
-			"---------", "---------", "---------", "---------", "---------",
-			"---   ---", "---   ---", "---   ---", "---   ---", "---   ---",
-			"---   ---", "---   ---"}
-
-		for i := 0; i < len(freshHexagram); i++ {
-			line := rand.Intn(len(marbles))
-			freshHexagram[i] = marbles[line]
-		}
-		return freshHexagram
 	}
+
+	marbles := [16]string{
+		"--- X ---",
+		"----O----", "----O----", "----O----",
+		"---------", "---------", "---------", "---------", "---------",
+		"---   ---", "---   ---", "---   ---", "---   ---", "---   ---",
+		"---   ---", "---   ---"}
+
+	for i := 0; i < len(freshHexagram); i++ {
+		line := rand.Intn(len(marbles))
+		freshHexagram[i] = marbles[line]
+	}
+	return freshHexagram
 }
 
-func word_wrap(text string, lineWidth int) string {
+func wordWrap(text string, lineWidth int) string {
 	words := strings.Fields(strings.TrimSpace(text))
 	if len(words) == 0 {
 		return text
@@ -99,7 +99,7 @@ func findHxgrmManually(find string) [6]string {
 		flag.Usage()
 		os.Exit(1)
 	} else {
-		for i, _ := range find {
+		for i := range find {
 			if string(find[i]) == "x" {
 				shape[i] = "---------"
 			} else {
@@ -116,11 +116,11 @@ func printer(hexagram Hexagram, title string, quiet bool) {
 		fmt.Printf("    %s", k)
 		fmt.Println()
 	}
-	fmt.Printf("        %v\n", hexagram.Id)
+	fmt.Printf("        %v\n", hexagram.ID)
 	fmt.Printf("    %v\n", hexagram.Name)
 	fmt.Println()
 	if !quiet {
-		fmt.Println(word_wrap(hexagram.Desc, 35))
+		fmt.Println(wordWrap(hexagram.Desc, 35))
 		fmt.Println()
 	}
 }
@@ -478,9 +478,9 @@ func main() {
 	var h Hexagrams
 	json.Unmarshal(jsonData, &h)
 
-	var relating bool = false
+	var relating = false
 	var initialHxgrm, primaryShape, relatingShape [6]string
-	var primaryTitle string = "  Primary Figure"
+	var primaryTitle = "  Primary Figure"
 	const relatingTitle string = "  Relating Figure"
 
 	if isFlagPassed("s") {
@@ -488,7 +488,7 @@ func main() {
 			flag.Usage()
 			os.Exit(1)
 		} else {
-			phex.Id = h.Hexagrams[showhex-1].Id
+			phex.ID = h.Hexagrams[showhex-1].ID
 			phex.Name = h.Hexagrams[showhex-1].Name
 			phex.Lines = h.Hexagrams[showhex-1].Lines
 			phex.Desc = h.Hexagrams[showhex-1].Desc
@@ -528,7 +528,7 @@ func main() {
 		for i := 0; i < len(h.Hexagrams); i++ {
 			match := findHexagram(primaryShape, h.Hexagrams[i].Lines)
 			if match {
-				phex.Id = h.Hexagrams[i].Id
+				phex.ID = h.Hexagrams[i].ID
 				phex.Name = h.Hexagrams[i].Name
 				if relating {
 					phex.Lines = initialHxgrm
@@ -546,7 +546,7 @@ func main() {
 			for i := 0; i < len(h.Hexagrams); i++ {
 				match := findHexagram(relatingShape, h.Hexagrams[i].Lines)
 				if match {
-					rhex.Id = h.Hexagrams[i].Id
+					rhex.ID = h.Hexagrams[i].ID
 					rhex.Name = h.Hexagrams[i].Name
 					rhex.Lines = h.Hexagrams[i].Lines
 					rhex.Desc = h.Hexagrams[i].Desc
