@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// Hexagram holds data parsed from JSON file
 type Hexagram struct {
 	ID    int       `json:"id"`
 	Lines [6]string `json:"lines"`
@@ -18,6 +19,7 @@ type Hexagram struct {
 	Desc  string    `json:"desc"`
 }
 
+// Hexagrams holds hexagrams parsed from JSON file
 type Hexagrams struct {
 	Hexagrams []Hexagram `json:"hexagrams"`
 }
