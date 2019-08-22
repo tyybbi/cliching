@@ -478,7 +478,11 @@ func main() {
 	rhex := Hexagram{}
 
 	var h Hexagrams
-	json.Unmarshal(jsonData, &h)
+
+	err := json.Unmarshal(jsonData, &h)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	var relating = false
 	var initialHxgrm, primaryShape, relatingShape [6]string
