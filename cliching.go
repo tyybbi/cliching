@@ -115,7 +115,7 @@ func findHxgrmManually(find string) [6]string {
 func printer(hexagram Hexagram, title string, quiet bool) {
 	fmt.Println(title)
 	for i := range hexagram.Lines {
-		fmt.Printf("    %s", hexagram.Lines[len(hexagrams.Lines)-1-i])
+		fmt.Printf("    %s", hexagram.Lines[len(hexagram.Lines)-1-i])
 		fmt.Println()
 	}
 	fmt.Printf("        %v\n", hexagram.ID)
