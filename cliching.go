@@ -469,8 +469,8 @@ func main() {
 	var find string
 	flag.BoolVar(&coins, "c", false, "Use coins method instead of marbles")
 	flag.BoolVar(&quiet, "q", false, "Don't show descriptions")
-	flag.IntVar(&showhex, "s", 0, "Show chosen hexagram (1-64) and its description")
-	flag.StringVar(&find, "f", "", "Find hexagram by its lines: x denotes Yang line, y denotes Yin line (from top down)")
+	flag.IntVar(&showhex, "s", 0, "Show specific hexagram (1-64) and its description")
+	flag.StringVar(&find, "f", "", "Find hexagram by its lines: x denotes Yang line, y denotes Yin line (starting from the bottom up)")
 
 	flag.Parse()
 
