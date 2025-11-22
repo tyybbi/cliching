@@ -1,3 +1,5 @@
+*Migrated to [Codeberg.org](https://codeberg.org/tyybbi/cliching)*
+
 # Cliching
 
 A simple CLI I Ching hexagram generator.
